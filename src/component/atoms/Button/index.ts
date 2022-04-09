@@ -1,2 +1,2 @@
-export { Button } from "./Button";
-export { NavLink } from "./NavLink";
+export { Button } from "@/component/atoms/Button/Button";
+export { NavLink } from "@/component/atoms/Button/NavLink";

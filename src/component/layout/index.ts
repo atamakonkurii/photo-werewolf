@@ -1,2 +1,2 @@
-export { FixedLayout } from "./FixedLayout";
-export { FluidLayout } from "./FluidLayout";
+export { FixedLayout } from "@/component/layout/FixedLayout";
+export { FluidLayout } from "@/component/layout/FluidLayout";

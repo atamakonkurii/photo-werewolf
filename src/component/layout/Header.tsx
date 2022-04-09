@@ -1,5 +1,6 @@
 import type { VFC } from "react";
-import { NavLink } from "src/component/Button";
+
+import { NavLink } from "@/component/atoms/Button";
 
 const items = [
   { href: "/", label: "Root" },
