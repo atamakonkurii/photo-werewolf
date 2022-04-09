@@ -1,5 +1,6 @@
 import type { VFC } from "react";
-import { Button } from "src/component/Button";
+
+import { Button } from "@/component/atoms/Button";
 
 export const Index: VFC = () => {
   const handleClick = () => {
