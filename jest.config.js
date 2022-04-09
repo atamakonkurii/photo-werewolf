@@ -10,6 +10,7 @@ const createJestConfig = nextJest({ dir: "./" });
 const customJestConfig = {
   setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
   modulePathIgnorePatterns: ["<rootDir>/e2e/"],
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   moduleNameMapper: { "src/(.*)": "<rootDir>/src/$1" }, // Handle module aliases (this will be automatically configured for you soon)
   // if using TypeScript with a baseUrl set to the root directory then you need the below for alias' to work
   moduleDirectories: ["node_modules", "<rootDir>/"],
