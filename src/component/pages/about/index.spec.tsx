@@ -4,7 +4,7 @@
 
 import { render, screen } from "@testing-library/react";
 
-import { About } from "./";
+import { About } from ".";
 
 describe("About", () => {
   it("renders a heading", () => {

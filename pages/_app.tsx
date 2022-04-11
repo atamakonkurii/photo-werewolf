@@ -16,7 +16,9 @@ const App: CustomAppPage = ({ Component, pageProps }) => {
       <Head>
         <title>nexst</title>
       </Head>
-      {getLayout(<Component {...pageProps} />)}
+      <div className="bg-gray-900">
+        {getLayout(<Component {...pageProps} />)}
+      </div>
     </>
   );
 };
