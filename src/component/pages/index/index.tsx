@@ -11,7 +11,7 @@ export const Index: VFC = () => {
         />
       </div>
       <div className="flex flex-col items-center text-center md:items-start md:pl-16 md:w-1/2 md:text-left lg:grow lg:pl-24">
-        <h1 className="mb-4 text-3xl font-medium text-gray-900 sm:text-4xl title-font">
+        <h1 className="mb-4 text-3xl font-medium text-gray-900 sm:text-4xl">
           Before they sold out
           <br className="hidden lg:inline-block" />
           readymade gluten

@@ -7,7 +7,7 @@ import { LayoutErrorBoundary } from "@/component/layout/LayoutErrorBoundary";
 /**
  * @package
  */
-export const FluidLayout: CustomLayout = (page) => {
+export const PreGameLayout: CustomLayout = (page) => {
   return (
     <div className="flex flex-col mx-auto max-w-screen-lg min-h-screen">
       <header>
