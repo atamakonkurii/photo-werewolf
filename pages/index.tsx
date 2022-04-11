@@ -1,12 +1,12 @@
 import type { CustomNextPage } from "next";
 
-import { FluidLayout } from "@/component/layout";
-import { Index } from "@/component/pages/index/index";
+import { PreGameLayout } from "@/component/layout";
+import { Index } from "@/component/templates/index/index";
 
 const IndexPage: CustomNextPage = () => {
   return <Index />;
 };
 
-IndexPage.getLayout = FluidLayout;
+IndexPage.getLayout = PreGameLayout;
 
 export default IndexPage;

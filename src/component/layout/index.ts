@@ -1,2 +1,2 @@
 export { FixedLayout } from "@/component/layout/FixedLayout";
-export { FluidLayout } from "@/component/layout/FluidLayout";
+export { PreGameLayout } from "@/component/layout/PreGameLayout";
