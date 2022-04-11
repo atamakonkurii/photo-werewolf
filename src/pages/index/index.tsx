@@ -1,18 +1,12 @@
 import type { VFC } from "react";
 
-import { Button } from "@/component/atoms/Button";
+import { NormalButton } from "@/component/atoms/Button";
 
 export const Index: VFC = () => {
-  const handleClick = () => {
-    window.alert("Hello, World!");
-  };
-
   return (
     <div>
       <h2>Index</h2>
-      <Button tag="button" className="p-2" onClick={handleClick}>
-        Click me!
-      </Button>
+      <NormalButton>Click me!</NormalButton>
     </div>
   );
 };
