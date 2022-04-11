@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { VFC } from "react";
 
 import { CreateRoomButton } from "@/component/molecules/Button/CreateRoomButton";
@@ -6,10 +7,11 @@ export const Index: VFC = () => {
   return (
     <div className="container flex flex-col items-center py-24 px-5 mx-auto md:flex-row">
       <div className="mb-10 w-5/6 md:mb-0 md:w-1/2 lg:w-full lg:max-w-lg">
-        <img
-          className="object-cover object-center rounded"
-          alt="hero"
-          src="https://dummyimage.com/720x600"
+        <Image
+          src="/images/top_view_image.png"
+          alt="logo"
+          width={500}
+          height={500}
         />
       </div>
       <div className="flex flex-col items-center text-center md:items-start md:pl-16 md:w-1/2 md:text-left lg:grow lg:pl-24">
