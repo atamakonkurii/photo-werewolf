@@ -1,7 +1,7 @@
 import type { CustomNextPage } from "next";
-import { About } from "src/pages/about";
 
 import { FixedLayout } from "@/component/layout";
+import { About } from "@/component/pages/about";
 
 const AboutPage: CustomNextPage = () => {
   return <About />;
