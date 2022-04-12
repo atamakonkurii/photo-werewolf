@@ -5,7 +5,7 @@ import { CreateRoomButton } from "@/component/molecules/Button/CreateRoomButton"
 
 export const Index: VFC = () => {
   return (
-    <div className="container flex flex-col items-center py-24 px-5 mx-auto md:flex-row">
+    <div className="container flex flex-col items-center py-8 px-5 mx-auto md:flex-row">
       <div className="mb-10 w-5/6 md:mb-0 md:w-1/2 lg:w-full lg:max-w-lg">
         <Image
           src="/images/top_view_image.png"
