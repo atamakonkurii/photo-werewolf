@@ -14,7 +14,7 @@ const App: CustomAppPage = ({ Component, pageProps }) => {
   return (
     <>
       <Head>
-        <title>nexst</title>
+        <title>photo werewolf</title>
       </Head>
       <div className="bg-gray-900">
         {getLayout(<Component {...pageProps} />)}
