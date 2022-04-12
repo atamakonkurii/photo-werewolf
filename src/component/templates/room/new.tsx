@@ -22,7 +22,7 @@ export const RoomNew: VFC = () => {
   const form = useForm({
     schema: zodResolver(schema),
     initialValues: {
-      roomName: "",
+      roomName: "てつこさんの部屋",
     },
   });
 
@@ -30,12 +30,12 @@ export const RoomNew: VFC = () => {
     <div className="mt-10">
       <Box sx={{ maxWidth: 300 }} mx="auto">
         <form
-          onSubmit={form.onSubmit((values) => {
+          onSubmit={form.onSubmit(() => {
             setRoomId(nanoid());
             console.log(roomId);
             router.push({
-              pathname: `/room/${roomId}`,
-              query: { roomName: values.roomName },
+              pathname: `/room/${roomId}/standby`,
+              // query: { roomName: values.roomName },
             });
           })}
         >
