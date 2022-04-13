@@ -2,6 +2,8 @@ import { Button } from "@mantine/core";
 import { useClipboard } from "@mantine/hooks";
 import type { VFC } from "react";
 
+import { Guests } from "@/component/organisms/Guests";
+
 export const RoomIdStandBy: VFC = () => {
   const clipboard = useClipboard({ timeout: 800 });
   return (
@@ -10,12 +12,12 @@ export const RoomIdStandBy: VFC = () => {
       <Button
         color={clipboard.copied ? "teal" : "blue"}
         onClick={() => {
-          //TODO:ドメインを取得できるようにする
           return clipboard.copy(`${document.URL}/guests/new`);
         }}
       >
         {clipboard.copied ? "コピーしました" : "招待URL"}
       </Button>
+      <Guests />
     </>
   );
 };
