@@ -2,6 +2,7 @@ import type { VFC } from "react";
 
 import { Title } from "@/component/atoms/Title";
 import { CopyLinkButton } from "@/component/molecules/Button/CopyLinkButton";
+import { LinkButton } from "@/component/molecules/Button/LinkButton";
 import { Guests } from "@/component/organisms/Guests";
 
 export const RoomIdStandBy: VFC = () => {
@@ -11,6 +12,8 @@ export const RoomIdStandBy: VFC = () => {
       <CopyLinkButton url={`${document.URL}/guests/new`} />
       <div className="mt-8" />
       <Guests />
+      <div className="mt-8" />
+      <LinkButton url="/room/new" text="ゲームを始める" />
     </div>
   );
 };

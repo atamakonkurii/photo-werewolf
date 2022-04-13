@@ -3,15 +3,16 @@ import Link from "next/link";
 
 type Props = {
   url: string;
+  text: string;
 };
 
-export const CreateRoomButton = (props: Props) => {
-  const { url } = props;
+export const LinkButton = (props: Props) => {
+  const { text, url } = props;
   return (
     <Link href={url}>
       <a>
         <Button color="violet" radius="md" size="lg">
-          部屋をつくる
+          {text}
         </Button>
       </a>
     </Link>
