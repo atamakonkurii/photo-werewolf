@@ -1,7 +1,7 @@
 import Image from "next/image";
 import type { VFC } from "react";
 
-import { CreateRoomButton } from "@/component/molecules/Button/CreateRoomButton";
+import { LinkButton } from "@/component/molecules/Button/LinkButton";
 
 export const Index: VFC = () => {
   return (
@@ -24,7 +24,7 @@ export const Index: VFC = () => {
           とても楽しそう。とても楽しそう。とても楽しそう。とても楽しそう。とても楽しそう。とても楽しそう。とても楽しそう。とても楽しそう。とても楽しそう。
         </p>
         <div className="flex justify-center">
-          <CreateRoomButton url="/room/new" />
+          <LinkButton url="/room/new" text="部屋をつくる" />
         </div>
       </div>
     </div>

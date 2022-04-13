@@ -3,15 +3,16 @@ import Link from "next/link";
 
 type Props = {
   url: string;
+  text: string;
 };
 
-export const CreateRoomButton = (props: Props) => {
+export const LinkButton = (props: Props) => {
+  const { text, url } = props;
   return (
-    // eslint-disable-next-line react/destructuring-assignment
-    <Link href={props.url}>
+    <Link href={url}>
       <a>
         <Button color="violet" radius="md" size="lg">
-          部屋をつくる
+          {text}
         </Button>
       </a>
     </Link>
