@@ -6,9 +6,9 @@ type Props = {
 };
 
 export const CreateRoomButton = (props: Props) => {
+  const { url } = props;
   return (
-    // eslint-disable-next-line react/destructuring-assignment
-    <Link href={props.url}>
+    <Link href={url}>
       <a>
         <Button color="violet" radius="md" size="lg">
           部屋をつくる
