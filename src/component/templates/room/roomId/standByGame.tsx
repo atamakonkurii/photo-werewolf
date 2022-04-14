@@ -6,9 +6,9 @@ import { CopyLinkButton } from "@/component/molecules/Button/CopyLinkButton";
 import { LinkButton } from "@/component/molecules/Button/LinkButton";
 import { Guests } from "@/component/organisms/Guests";
 
-export const RoomIdStandBy: VFC = () => {
+export const StandByGame: VFC = () => {
   const router = useRouter();
-  const gamePath = router.asPath.replace("/standby", "");
+  const gamePath = router.asPath;
   return (
     <div className="flex flex-col justify-center items-center p-16">
       <Title title="ゲーム開始まで待機中" />

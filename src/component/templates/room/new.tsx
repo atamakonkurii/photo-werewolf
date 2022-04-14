@@ -37,7 +37,7 @@ export const RoomNew: VFC = () => {
             onSubmit={form.onSubmit(() => {
               setRoomId(nanoid());
               router.push({
-                pathname: `/room/${roomId}/standby`,
+                pathname: `/room/${roomId}`,
                 // query: { roomName: values.roomName },
               });
             })}
