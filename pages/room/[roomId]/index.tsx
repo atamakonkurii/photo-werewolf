@@ -1,15 +1,12 @@
 import type { CustomNextPage } from "next";
 
 import { PreGameLayout } from "@/component/layout";
+import { StartGame } from "@/component/templates/room";
 
-const RoomIdPage: CustomNextPage = () => {
-  return (
-    <>
-      <h1>ゲーム部屋</h1>
-    </>
-  );
+const StartGamePage: CustomNextPage = () => {
+  return <StartGame />;
 };
 
-RoomIdPage.getLayout = PreGameLayout;
+StartGamePage.getLayout = PreGameLayout;
 
-export default RoomIdPage;
+export default StartGamePage;
