@@ -1,0 +1,1 @@
+export { GuestsNew } from "./new";

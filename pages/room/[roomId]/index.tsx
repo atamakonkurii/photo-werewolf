@@ -1,15 +1,18 @@
 import type { CustomNextPage } from "next";
 
 import { PreGameLayout } from "@/component/layout";
+import { StartGame } from "@/component/templates/room/roomId";
+import { StandByGame } from "@/component/templates/room/roomId/standByGame";
 
-const RoomIdPage: CustomNextPage = () => {
+const StartGamePage: CustomNextPage = () => {
   return (
     <>
-      <h1>ゲーム部屋</h1>
+      <StandByGame />
+      <StartGame />
     </>
   );
 };
 
-RoomIdPage.getLayout = PreGameLayout;
+StartGamePage.getLayout = PreGameLayout;
 
-export default RoomIdPage;
+export default StartGamePage;
