@@ -3,6 +3,30 @@
 -- and may require manual changes to the script to ensure changes are applied in the correct order.
 -- Please report an issue for any failure with the reproduction steps.
 
+CREATE TABLE IF NOT EXISTS public.users
+(
+    user_id character varying COLLATE pg_catalog."default" NOT NULL,
+    user_type user_type NOT NULL,
+    created_at timestamp with time zone NOT NULL DEFAULT (now() AT TIME ZONE 'utc'::text),
+    CONSTRAINT users_pkey PRIMARY KEY (user_id)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.users
+    OWNER to postgres;
+
+ALTER TABLE IF EXISTS public.users
+    ENABLE ROW LEVEL SECURITY;
+
+GRANT ALL ON TABLE public.users TO anon;
+
+GRANT ALL ON TABLE public.users TO authenticated;
+
+GRANT ALL ON TABLE public.users TO postgres;
+
+GRANT ALL ON TABLE public.users TO service_role;
+
 CREATE TABLE IF NOT EXISTS public.auth_users
 (
     user_id character varying COLLATE pg_catalog."default" NOT NULL,
@@ -120,30 +144,6 @@ GRANT ALL ON TABLE public.guest_users TO authenticated;
 GRANT ALL ON TABLE public.guest_users TO postgres;
 
 GRANT ALL ON TABLE public.guest_users TO service_role;
-
-CREATE TABLE IF NOT EXISTS public.users
-(
-    user_id character varying COLLATE pg_catalog."default" NOT NULL,
-    user_type user_type NOT NULL,
-    created_at timestamp with time zone NOT NULL DEFAULT (now() AT TIME ZONE 'utc'::text),
-    CONSTRAINT users_pkey PRIMARY KEY (user_id)
-)
-
-TABLESPACE pg_default;
-
-ALTER TABLE IF EXISTS public.users
-    OWNER to postgres;
-
-ALTER TABLE IF EXISTS public.users
-    ENABLE ROW LEVEL SECURITY;
-
-GRANT ALL ON TABLE public.users TO anon;
-
-GRANT ALL ON TABLE public.users TO authenticated;
-
-GRANT ALL ON TABLE public.users TO postgres;
-
-GRANT ALL ON TABLE public.users TO service_role;
 
 -- Type: game_result
 
