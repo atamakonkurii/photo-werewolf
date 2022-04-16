@@ -3,6 +3,46 @@
 -- and may require manual changes to the script to ensure changes are applied in the correct order.
 -- Please report an issue for any failure with the reproduction steps.
 
+-- Type: game_result
+
+-- DROP TYPE IF EXISTS public.game_result;
+
+CREATE TYPE public.game_result AS ENUM
+    ('UNSETTLLED', 'LOSE', 'WIN');
+
+ALTER TYPE public.game_result
+    OWNER TO postgres;
+
+-- Type: game_type
+
+-- DROP TYPE IF EXISTS public.game_type;
+
+CREATE TYPE public.game_type AS ENUM
+    ('PHOTO_WEREWOLF');
+
+ALTER TYPE public.game_type
+    OWNER TO postgres;
+
+-- Type: room_status
+
+-- DROP TYPE IF EXISTS public.room_status;
+
+CREATE TYPE public.room_status AS ENUM
+    ('STANDBY', 'GAME', 'VOTE', 'FINISHED');
+
+ALTER TYPE public.room_status
+    OWNER TO postgres;
+
+-- Type: user_type
+
+-- DROP TYPE IF EXISTS public.user_type;
+
+CREATE TYPE public.user_type AS ENUM
+    ('AUTH', 'GUEST');
+
+ALTER TYPE public.user_type
+    OWNER TO postgres;
+
 CREATE TABLE IF NOT EXISTS public.users
 (
     user_id character varying COLLATE pg_catalog."default" NOT NULL,
@@ -144,43 +184,3 @@ GRANT ALL ON TABLE public.guest_users TO authenticated;
 GRANT ALL ON TABLE public.guest_users TO postgres;
 
 GRANT ALL ON TABLE public.guest_users TO service_role;
-
--- Type: game_result
-
--- DROP TYPE IF EXISTS public.game_result;
-
-CREATE TYPE public.game_result AS ENUM
-    ('UNSETTLLED', 'LOSE', 'WIN');
-
-ALTER TYPE public.game_result
-    OWNER TO postgres;
-
--- Type: game_type
-
--- DROP TYPE IF EXISTS public.game_type;
-
-CREATE TYPE public.game_type AS ENUM
-    ('PHOTO_WEREWOLF');
-
-ALTER TYPE public.game_type
-    OWNER TO postgres;
-
--- Type: room_status
-
--- DROP TYPE IF EXISTS public.room_status;
-
-CREATE TYPE public.room_status AS ENUM
-    ('STANDBY', 'GAME', 'VOTE', 'FINISHED');
-
-ALTER TYPE public.room_status
-    OWNER TO postgres;
-
--- Type: user_type
-
--- DROP TYPE IF EXISTS public.user_type;
-
-CREATE TYPE public.user_type AS ENUM
-    ('AUTH', 'GUEST');
-
-ALTER TYPE public.user_type
-    OWNER TO postgres;
