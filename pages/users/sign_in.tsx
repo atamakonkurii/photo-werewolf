@@ -15,17 +15,17 @@ const SignIn = () => {
     control,
     formState: { errors },
     handleSubmit,
-  } = useForm();
-  const runSignin = async ({ email, password }: formData) => {
+  } = useForm<formData>();
+  const RunSignIn = async ({ email, password }: formData) => {
     await supabase.auth.signIn({
       email,
       password,
     });
   };
   return (
-    <div className="flex justify-center items-center h-screen center">
+    <div className="flex justify-center items-center h-screen">
       <div className="p-5 w-full  bg-white shadow sm:max-w-xl sm:rounded-lg">
-        <form onSubmit={handleSubmit(runSignin)}>
+        <form onSubmit={handleSubmit(RunSignIn)}>
           <Controller
             control={control}
             name="email"

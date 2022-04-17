@@ -11,26 +11,27 @@ const SignOut = () => {
   type formData = {
     email: string;
     password: string;
+    confirmPassword?: string;
   };
   const {
     control,
     formState: { errors },
     handleSubmit,
     watch,
-  } = useForm();
+  } = useForm<formData>();
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const password = useRef({});
   password.current = watch("password", "");
-  const runSignup = async ({ email, password }: formData) => {
+  const RunSignUp = async ({ email, password }: formData) => {
     await supabase.auth.signUp({
       email,
       password,
     });
   };
   return (
-    <div className="flex justify-center items-center h-screen center">
+    <div className="flex justify-center items-center h-screen">
       <div className="p-5 w-full  bg-white shadow sm:max-w-xl sm:rounded-lg">
-        <form onSubmit={handleSubmit(runSignup)}>
+        <form onSubmit={handleSubmit(RunSignUp)}>
           <Controller
             control={control}
             name="email"
