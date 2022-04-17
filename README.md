@@ -16,3 +16,7 @@ supabase db commit <migration_file_prefix_name>
 ```
 supabase db push
 ```
+
+```
+supabase db remote commit
+```
