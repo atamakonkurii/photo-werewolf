@@ -123,39 +123,6 @@ GRANT ALL ON TABLE public.rooms TO postgres;
 
 GRANT ALL ON TABLE public.rooms TO service_role;
 
-CREATE TABLE IF NOT EXISTS public.room_users
-(
-    room_id character varying COLLATE pg_catalog."default",
-    user_id character varying COLLATE pg_catalog."default", 
-    game_result game_result NOT NULL DEFAULT 'UNSETTLLED'::game_result,
-    created_at timestamp with time zone DEFAULT (now() AT TIME ZONE 'utc'::text),
-    CONSTRAINT room_users_pkey PRIMARY KEY (room_id, user_id),
-    CONSTRAINT room_users_room_id_fkey FOREIGN KEY (room_id)
-        REFERENCES public.rooms (room_id) MATCH SIMPLE
-        ON UPDATE NO ACTION
-        ON DELETE NO ACTION,
-    CONSTRAINT room_users_user_id_fkey FOREIGN KEY (user_id)
-        REFERENCES public.users (user_id) MATCH SIMPLE
-        ON UPDATE NO ACTION
-        ON DELETE NO ACTION
-)
-
-TABLESPACE pg_default;
-
-ALTER TABLE IF EXISTS public.room_users
-    OWNER to postgres;
-
-ALTER TABLE IF EXISTS public.room_users
-    ENABLE ROW LEVEL SECURITY;
-
-GRANT ALL ON TABLE public.room_users TO anon;
-
-GRANT ALL ON TABLE public.room_users TO authenticated;
-
-GRANT ALL ON TABLE public.room_users TO postgres;
-
-GRANT ALL ON TABLE public.room_users TO service_role;
-
 CREATE TABLE IF NOT EXISTS public.guest_users
 (
     user_id character varying COLLATE pg_catalog."default" NOT NULL,

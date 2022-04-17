@@ -3,8 +3,6 @@
 -- and may require manual changes to the script to ensure changes are applied in the correct order.
 -- Please report an issue for any failure with the reproduction steps.
 
-DROP TABLE IF EXISTS public.room_users CASCADE;
-
 CREATE TABLE IF NOT EXISTS public.game_results
 (
     room_id character varying COLLATE pg_catalog."default" NOT NULL,
