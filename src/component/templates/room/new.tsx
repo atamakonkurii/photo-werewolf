@@ -33,12 +33,10 @@ export const RoomNew: VFC = () => {
   const handleSubmit = async (values: { roomName: any }) => {
     setRoomId(nanoid());
 
-    const { data, error } = await supabase
+    await supabase
       .from("rooms")
       // eslint-disable-next-line @typescript-eslint/naming-convention
       .insert([{ room_id: roomId, name: values.roomName }]);
-
-    console.log(data, error);
 
     router.push({
       pathname: `/room/${roomId}`,
