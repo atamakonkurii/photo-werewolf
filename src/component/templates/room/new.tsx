@@ -1,3 +1,4 @@
+/* eslint-disable arrow-body-style */
 /* eslint-disable no-console */
 import { Box, Button, Group, TextInput } from "@mantine/core";
 import { useForm, zodResolver } from "@mantine/form";
@@ -9,6 +10,7 @@ import { DoorEnter } from "tabler-icons-react";
 import { z } from "zod";
 
 import { Title } from "@/component/atoms/Title";
+import { supabase } from "@/utils/supabase";
 
 const schema = z.object({
   roomName: z
@@ -28,20 +30,25 @@ export const RoomNew: VFC = () => {
     },
   });
 
+  const handleSubmit = async (values: { roomName: any }) => {
+    setRoomId(nanoid());
+
+    await supabase
+      .from("rooms")
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      .insert([{ room_id: roomId, name: values.roomName }]);
+
+    router.push({
+      pathname: `/room/${roomId}`,
+    });
+  };
+
   return (
     <div className="flex flex-col justify-center items-center p-16">
       <Title title="部屋名を決めよう" />
       <div className="mt-10">
         <Box sx={{ maxWidth: 300 }} mx="auto">
-          <form
-            onSubmit={form.onSubmit(() => {
-              setRoomId(nanoid());
-              router.push({
-                pathname: `/room/${roomId}`,
-                // query: { roomName: values.roomName },
-              });
-            })}
-          >
+          <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
             <TextInput
               required
               label="部屋名"
