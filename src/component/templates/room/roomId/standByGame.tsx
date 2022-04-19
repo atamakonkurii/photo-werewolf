@@ -18,10 +18,19 @@ const getRoomName = async (
     .eq("room_id", roomId);
 
   if (rooms) {
-    setRoomName(rooms[0].name);
+    setRoomName(rooms[0]?.name);
   } else {
     setRoomName("");
   }
+};
+
+const getRoomUser = async (roomId: string) => {
+  const { data: users } = await supabase
+    .from("game_results")
+    .select("user_id")
+    .eq("room_id", roomId);
+
+  return users;
 };
 
 export const StandByGame: VFC = () => {
@@ -32,6 +41,9 @@ export const StandByGame: VFC = () => {
   const roomId = roomId_tmp.split("?")[0];
 
   getRoomName(roomId, setRoomName);
+  const users = getRoomUser(roomId);
+  // eslint-disable-next-line no-console
+  console.log(users);
 
   return (
     <div className="flex flex-col justify-center items-center p-16">
