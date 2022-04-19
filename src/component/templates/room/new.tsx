@@ -30,7 +30,7 @@ export const RoomNew: VFC = () => {
     },
   });
 
-  const handleSubmit = async (values: { roomName: any }) => {
+  const handleSubmit = async (values: { roomName: string }) => {
     setRoomId(nanoid());
 
     await supabase
