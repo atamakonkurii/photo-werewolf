@@ -1,11 +1,13 @@
 import { Box, Button, Group, TextInput } from "@mantine/core";
 import { useForm, zodResolver } from "@mantine/form";
+import { nanoid } from "nanoid";
 import { useRouter } from "next/router";
 import type { VFC } from "react";
 import { DoorEnter } from "tabler-icons-react";
 import { z } from "zod";
 
 import { Title } from "@/component/atoms/Title";
+import { supabase } from "@/utils/supabase";
 
 const schema = z.object({
   name: z
@@ -25,6 +27,24 @@ export const GuestsNew: VFC = () => {
     },
   });
 
+  const handleSubmit = async (values: { name: string }) => {
+    const guestId = nanoid();
+    await supabase
+      .from("users")
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      .insert([{ user_id: guestId, user_type: "GUEST" }]);
+
+    await supabase
+      .from("guest_users")
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      .insert([{ user_id: guestId, name: values.name }]);
+
+    router.push({
+      pathname: standByPath,
+      query: { uid: guestId },
+    });
+  };
+
   return (
     <div className="flex flex-col justify-center items-center p-16">
       <Title title="名前を入力しよう" />
@@ -32,10 +52,8 @@ export const GuestsNew: VFC = () => {
       <div className="mt-10">
         <Box sx={{ maxWidth: 300 }} mx="auto">
           <form
-            onSubmit={form.onSubmit(() => {
-              router.push({
-                pathname: standByPath,
-              });
+            onSubmit={form.onSubmit((values) => {
+              return handleSubmit(values);
             })}
           >
             <TextInput

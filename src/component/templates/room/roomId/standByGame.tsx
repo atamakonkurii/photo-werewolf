@@ -28,7 +28,9 @@ export const StandByGame: VFC = () => {
   const [roomName, setRoomName] = useState("name");
   const router = useRouter();
   const gamePath = router.asPath;
-  const roomId = gamePath.split("/")[2];
+  const roomId_tmp = gamePath.split("/")[2];
+  const roomId = roomId_tmp.split("?")[0];
+
   getRoomName(roomId, setRoomName);
 
   return (
