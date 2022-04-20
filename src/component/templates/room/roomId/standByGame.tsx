@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import type { Dispatch, SetStateAction, VFC } from "react";
+import { useEffect } from "react";
 import { useState } from "react";
 
 import { Title } from "@/component/atoms/Title";
@@ -24,26 +25,34 @@ const getRoomName = async (
   }
 };
 
-const getRoomUser = async (roomId: string) => {
-  const { data: users } = await supabase
+const getRoomUsers = async (
+  roomId: string,
+  setData: Dispatch<SetStateAction<any[]>>
+) => {
+  const { data } = await supabase
     .from("game_results")
-    .select("user_id")
+    .select("users (name)")
     .eq("room_id", roomId);
 
-  return users;
+  if (data) {
+    setData(data);
+  } else {
+    setData([]);
+  }
 };
 
 export const StandByGame: VFC = () => {
   const [roomName, setRoomName] = useState("name");
+  const [data, setData] = useState<any[]>([]);
   const router = useRouter();
   const gamePath = router.asPath;
   const roomId_tmp = gamePath.split("/")[2];
   const roomId = roomId_tmp.split("?")[0];
 
-  getRoomName(roomId, setRoomName);
-  const users = getRoomUser(roomId);
-  // eslint-disable-next-line no-console
-  console.log(users);
+  useEffect(() => {
+    getRoomName(roomId, setRoomName);
+    getRoomUsers(roomId, setData);
+  }, [roomId]);
 
   return (
     <div className="flex flex-col justify-center items-center p-16">
@@ -52,7 +61,7 @@ export const StandByGame: VFC = () => {
         url={`${process.env.NEXT_PUBLIC_DOMAIN}${gamePath}/guests/new`}
       />
       <div className="mt-8" />
-      <Guests />
+      {data ? <Guests users={data} /> : <div>ひとりもいません</div>}
       <div className="mt-8" />
       <LinkButton url={gamePath} text="ゲームを始める" />
     </div>

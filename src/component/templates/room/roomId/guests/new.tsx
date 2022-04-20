@@ -34,7 +34,7 @@ export const GuestsNew: VFC = () => {
     await supabase
       .from("users")
       // eslint-disable-next-line @typescript-eslint/naming-convention
-      .insert([{ user_id: guestId, user_type: "GUEST" }]);
+      .insert([{ user_id: guestId, name: values.name, user_type: "GUEST" }]);
 
     await supabase
       .from("guest_users")
