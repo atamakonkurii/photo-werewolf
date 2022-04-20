@@ -11,7 +11,7 @@ export default {
 } as ComponentMeta<typeof Guest>;
 
 const Template: ComponentStory<typeof Guest> = () => {
-  return <Guest />;
+  return <Guest name="名前を入れてください" />;
 };
 
 export const Normal = Template.bind({});
