@@ -1,5 +1,10 @@
+/* eslint-disable react/destructuring-assignment */
 /* eslint-disable @next/next/no-html-link-for-pages */
-export const Guest = () => {
+type Props = {
+  name: string;
+};
+
+export const Guest = (props: Props) => {
   return (
     <div className="flex flex-col justify-between items-center p-4 hover:bg-[#f6f8f9]  duration-300 cursor-pointer sm:flex-row sm:py-4 sm:px-8">
       <div className="flex flex-col items-center text-center sm:flex-row sm:text-left">
@@ -11,7 +16,7 @@ export const Guest = () => {
         </div>
         <div className="flex flex-col mb-4 sm:mr-4 sm:mb-0">
           <a href="/" className="font-medium no-underline">
-            Julian Jill Brown
+            {props.name}
           </a>
         </div>
       </div>
