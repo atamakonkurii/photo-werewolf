@@ -1,7 +1,9 @@
+/* eslint-disable react/destructuring-assignment */
 /* eslint-disable arrow-body-style */
 /* eslint-disable no-console */
 import { Box, Button, Group, TextInput } from "@mantine/core";
 import { useForm, zodResolver } from "@mantine/form";
+import type { User } from "@supabase/supabase-js";
 import { nanoid } from "nanoid";
 import { useRouter } from "next/router";
 import type { VFC } from "react";
@@ -12,6 +14,10 @@ import { z } from "zod";
 import { Title } from "@/component/atoms/Title";
 import { supabase } from "@/utils/supabase";
 
+type Props = {
+  user: User;
+};
+
 const schema = z.object({
   roomName: z
     .string()
@@ -19,7 +25,7 @@ const schema = z.object({
     .max(10, { message: "3~10文字で入力してください。" }),
 });
 
-export const RoomNew: VFC = () => {
+export const RoomNew: VFC<Props> = (props) => {
   const [roomId, setRoomId] = useState(nanoid());
   const router = useRouter();
 
@@ -36,7 +42,10 @@ export const RoomNew: VFC = () => {
     await supabase
       .from("rooms")
       // eslint-disable-next-line @typescript-eslint/naming-convention
-      .insert([{ room_id: roomId, name: values.roomName }]);
+      .insert([
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        { room_id: roomId, name: values.roomName, owner_id: props.user.id },
+      ]);
 
     router.push({
       pathname: `/room/${roomId}`,

@@ -17,7 +17,7 @@ const CreateRoomPage: CustomNextPage = () => {
     }
   }, [replace, user]);
 
-  return <RoomNew />;
+  return <>{user && <RoomNew user={user} />}</>;
 };
 
 CreateRoomPage.getLayout = PreGameLayout;
