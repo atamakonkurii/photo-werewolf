@@ -51,7 +51,7 @@ const getRoomUsers = async (
   }
 };
 
-export const StandByGame: VFC<Props> = (props) => {
+export const StandBy: VFC<Props> = (props) => {
   const [roomName, setRoomName] = useState("name");
   const [data, setData] = useState<any[]>([]);
   const [hasButton, setHasButton] = useState(false);
