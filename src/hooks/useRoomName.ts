@@ -2,11 +2,13 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useState } from "react";
 
+import { useAllowedFetch } from "@/hooks/useAllowedFetch";
 import { supabase } from "@/utils/supabase";
 
 export const useRoomName = (authUserId: string | undefined) => {
-  const [roomName, setRoomName] = useState<string>("待機部屋");
-  const [hasButton, setHasButton] = useState<boolean>(false);
+  const [roomName, setRoomName] = useState<string>("ローディング中...");
+  const [isOwner, setIsOwner] = useState<boolean>(false);
+  const isAllowedFetch = useAllowedFetch();
   const router = useRouter();
   const gamePath = router.asPath;
   const roomId_tmp = gamePath.split("/")[2];
@@ -20,12 +22,13 @@ export const useRoomName = (authUserId: string | undefined) => {
         .eq("room_id", roomId)
         .single();
       if (rooms) {
-        setRoomName(rooms.name || "待機部屋");
-        authUserId && setHasButton(rooms.owner_id === authUserId);
+        setRoomName(rooms.name || "エラー");
+        authUserId && setIsOwner(rooms.owner_id === authUserId);
       }
     };
-    getRoomName(authUserId);
-  }, [authUserId, roomId]);
 
-  return { roomName, hasButton };
+    isAllowedFetch && getRoomName(authUserId);
+  }, [isAllowedFetch]);
+
+  return { roomName, isOwner };
 };

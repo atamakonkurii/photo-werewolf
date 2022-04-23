@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useState } from "react";
 
+import { useAllowedFetch } from "@/hooks/useAllowedFetch";
 import { supabase } from "@/utils/supabase";
 
 export const useRoomState = () => {
@@ -12,6 +13,7 @@ export const useRoomState = () => {
   const gamePath = router.asPath;
   const roomId_tmp = gamePath.split("/")[2];
   const roomId = roomId_tmp.split("?")[0];
+  const isAllowedFetch = useAllowedFetch();
 
   useEffect(() => {
     const getRoomState = async () => {
@@ -25,8 +27,17 @@ export const useRoomState = () => {
         setState(rooms.room_status);
       }
     };
-    getRoomState();
-  }, [roomId]);
+    isAllowedFetch && getRoomState();
+  }, [isAllowedFetch]);
+
+  const changeRoomStatus = supabase
+    .from(`rooms:room_id=eq.${roomId}`)
+    .on("UPDATE", (payload) => {
+      setState(payload.new.room_status);
+    })
+    .subscribe();
+
+  changeRoomStatus.on;
 
   return state;
 };

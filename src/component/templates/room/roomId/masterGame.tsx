@@ -18,7 +18,7 @@ type Props = {
 
 export const MasterGame: VFC<Props> = (props) => {
   const state = useRoomState();
-  const { hasButton, roomName } = useRoomName(props.authUser?.id);
+  const { isOwner, roomName } = useRoomName(props.authUser?.id);
   const roomUsers = useRoomUsers();
 
   const GameType = () => {
@@ -27,7 +27,7 @@ export const MasterGame: VFC<Props> = (props) => {
         return (
           <StandBy
             roomName={roomName}
-            hasButton={hasButton}
+            isOwner={isOwner}
             user={props.authUser}
             roomUsers={roomUsers}
           />

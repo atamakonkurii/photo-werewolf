@@ -10,7 +10,7 @@ export const Guests = (props: Props) => {
     <div className="flex flex-col py-4 mx-auto  max-w-lg bg-white rounded-xl shadow-xl">
       {props ? (
         props.users.map((item: { users: { name: string } }) => {
-          return <Guest key={item.users.name} name={item.users.name} />;
+          return <Guest key={Math.random()} name={item.users.name} />;
         })
       ) : (
         <div className="text-white">ひとりもいません</div>
