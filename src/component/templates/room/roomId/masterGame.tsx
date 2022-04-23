@@ -5,6 +5,7 @@ import type { VFC } from "react";
 import {
   Finished,
   Game,
+  PhotoUpload,
   StandBy,
   Vote,
 } from "@/component/templates/room/roomId/";
@@ -32,6 +33,8 @@ export const MasterGame: VFC<Props> = (props) => {
             roomUsers={roomUsers}
           />
         );
+      case "PHOTO_UPLOAD":
+        return <PhotoUpload />;
       case "GAME":
         return <Game />;
       case "VOTE":

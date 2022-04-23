@@ -26,7 +26,7 @@ const handleClick = (roomId: string, roomUsers: any[] | null) => {
   roomUsers?.map((roomUser) => {
     createStandardGame(roomUser.users.user_id);
   });
-  changeGameType(roomId, "GAME");
+  changeGameType(roomId, "PHOTO_UPLOAD");
 };
 
 export const StandBy: VFC<Props> = (props) => {
