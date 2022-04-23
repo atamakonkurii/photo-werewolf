@@ -18,7 +18,7 @@ export const useRoomUsers = () => {
     const getRoomUsers = async () => {
       const { data: roomUsers } = await supabase
         .from("game_results")
-        .select("users (name)")
+        .select("users (name, user_id)")
         .eq("room_id", roomId);
       setRoomUsers(roomUsers);
     };

@@ -33,17 +33,14 @@ export const GuestsNew: VFC = () => {
     // TODO:dbfunctionでひとまとめにする
     await supabase
       .from("users")
-      // eslint-disable-next-line @typescript-eslint/naming-convention
       .insert([{ user_id: guestId, name: values.name, user_type: "GUEST" }]);
 
     await supabase
       .from("guest_users")
-      // eslint-disable-next-line @typescript-eslint/naming-convention
       .insert([{ user_id: guestId, name: values.name }]);
 
     await supabase
       .from("game_results")
-      // eslint-disable-next-line @typescript-eslint/naming-convention
       .insert([{ user_id: guestId, room_id: roomId }]);
 
     router.push({
