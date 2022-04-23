@@ -10,7 +10,7 @@ const StartGamePage: CustomNextPage = () => {
 
   return (
     <>
-      <MasterGame user={user} />
+      <MasterGame authUser={user} />
     </>
   );
 };
