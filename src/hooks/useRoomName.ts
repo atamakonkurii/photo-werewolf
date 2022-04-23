@@ -7,10 +7,17 @@ import { supabase } from "@/utils/supabase";
 export const useRoomName = (authUserId: string | undefined) => {
   const [roomName, setRoomName] = useState<string>("待機部屋");
   const [hasButton, setHasButton] = useState<boolean>(false);
+  const [isAllowedFetch, setIsAllowedFetch] = useState<boolean>(false);
   const router = useRouter();
   const gamePath = router.asPath;
   const roomId_tmp = gamePath.split("/")[2];
   const roomId = roomId_tmp.split("?")[0];
+
+  useEffect(() => {
+    if (router.asPath !== router.route) {
+      setIsAllowedFetch(true);
+    }
+  }, [router]);
 
   useEffect(() => {
     const getRoomName = async (authUserId: string | undefined) => {
@@ -24,8 +31,9 @@ export const useRoomName = (authUserId: string | undefined) => {
         authUserId && setHasButton(rooms.owner_id === authUserId);
       }
     };
-    getRoomName(authUserId);
-  }, [authUserId, roomId]);
+
+    isAllowedFetch && getRoomName(authUserId);
+  }, [isAllowedFetch]);
 
   return { roomName, hasButton };
 };

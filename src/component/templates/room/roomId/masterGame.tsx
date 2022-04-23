@@ -11,6 +11,7 @@ import {
 import { useRoomName } from "@/hooks/useRoomName";
 import { useRoomState } from "@/hooks/useRoomState";
 import { useRoomUsers } from "@/hooks/useRoomUsers";
+// import { supabase } from "@/utils/supabase";
 
 type Props = {
   authUser: User | null;
@@ -20,6 +21,19 @@ export const MasterGame: VFC<Props> = (props) => {
   const state = useRoomState();
   const { hasButton, roomName } = useRoomName(props.authUser?.id);
   const roomUsers = useRoomUsers();
+
+  // const mySubscription = supabase
+  //   .from("game_results")
+  //   .on("*", (payload) => {
+  //     // eslint-disable-next-line no-console
+  //     console.log("Change received!", payload);
+  //   })
+  //   .subscribe();
+
+  // mySubscription.on("error", (error) => {
+  //   // eslint-disable-next-line no-console
+  //   console.log("Error received!", error);
+  // });
 
   const GameType = () => {
     switch (state) {
