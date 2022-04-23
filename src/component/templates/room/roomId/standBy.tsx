@@ -11,7 +11,7 @@ import { Guests } from "@/component/organisms/Guests";
 type Props = {
   user: User | null;
   roomName: string;
-  hasButton: boolean;
+  isOwner: boolean;
   roomUsers: any[] | null;
 };
 
@@ -22,7 +22,7 @@ export const StandBy: VFC<Props> = (props) => {
   return (
     <div className="flex flex-col justify-center items-center p-16">
       <Title title={props.roomName} />
-      {props.hasButton && (
+      {props.isOwner && (
         <CopyLinkButton
           url={`${process.env.NEXT_PUBLIC_DOMAIN}${gamePath}/guests/new`}
         />
@@ -36,10 +36,10 @@ export const StandBy: VFC<Props> = (props) => {
       )}
       <div className="mt-8" />
 
-      {props.hasButton ? (
+      {props.isOwner ? (
         <LinkButton url={gamePath} text="ゲームを始める" />
       ) : (
-        <div className="text-white">ホストの操作待機中</div>
+        <div className="text-white">ホストの操作をお待ちください</div>
       )}
     </div>
   );

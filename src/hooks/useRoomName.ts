@@ -5,8 +5,8 @@ import { useState } from "react";
 import { supabase } from "@/utils/supabase";
 
 export const useRoomName = (authUserId: string | undefined) => {
-  const [roomName, setRoomName] = useState<string>("待機部屋");
-  const [hasButton, setHasButton] = useState<boolean>(false);
+  const [roomName, setRoomName] = useState<string>("ローディング中...");
+  const [isOwner, setIsOwner] = useState<boolean>(false);
   const [isAllowedFetch, setIsAllowedFetch] = useState<boolean>(false);
   const router = useRouter();
   const gamePath = router.asPath;
@@ -27,13 +27,13 @@ export const useRoomName = (authUserId: string | undefined) => {
         .eq("room_id", roomId)
         .single();
       if (rooms) {
-        setRoomName(rooms.name || "待機部屋");
-        authUserId && setHasButton(rooms.owner_id === authUserId);
+        setRoomName(rooms.name || "エラー");
+        authUserId && setIsOwner(rooms.owner_id === authUserId);
       }
     };
 
     isAllowedFetch && getRoomName(authUserId);
   }, [isAllowedFetch]);
 
-  return { roomName, hasButton };
+  return { roomName, isOwner };
 };
