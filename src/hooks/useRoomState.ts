@@ -35,5 +35,14 @@ export const useRoomState = () => {
     isAllowedFetch && getRoomState();
   }, [isAllowedFetch]);
 
-  return { state, roomId };
+  const changeRoomStatus = supabase
+    .from(`rooms:room_id=eq.${roomId}`)
+    .on("UPDATE", (payload) => {
+      setState(payload.new.room_status);
+    })
+    .subscribe();
+
+  changeRoomStatus.on;
+
+  return state;
 };
