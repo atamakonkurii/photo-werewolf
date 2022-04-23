@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useState } from "react";
 
+import { useAllowedFetch } from "@/hooks/useAllowedFetch";
 import { supabase } from "@/utils/supabase";
 
 export const useRoomUsers = () => {
@@ -10,13 +11,7 @@ export const useRoomUsers = () => {
   const gamePath = router.asPath;
   const roomId_tmp = gamePath.split("/")[2];
   const roomId = roomId_tmp.split("?")[0];
-  const [isAllowedFetch, setIsAllowedFetch] = useState<boolean>(false);
-
-  useEffect(() => {
-    if (router.asPath !== router.route) {
-      setIsAllowedFetch(true);
-    }
-  }, [router]);
+  const isAllowedFetch = useAllowedFetch();
 
   useEffect(() => {
     const getRoomUsers = async () => {
