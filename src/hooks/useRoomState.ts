@@ -12,6 +12,13 @@ export const useRoomState = () => {
   const gamePath = router.asPath;
   const roomId_tmp = gamePath.split("/")[2];
   const roomId = roomId_tmp.split("?")[0];
+  const [isAllowedFetch, setIsAllowedFetch] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (router.asPath !== router.route) {
+      setIsAllowedFetch(true);
+    }
+  }, [router]);
 
   useEffect(() => {
     const getRoomState = async () => {
@@ -25,8 +32,8 @@ export const useRoomState = () => {
         setState(rooms.room_status);
       }
     };
-    getRoomState();
-  }, [roomId]);
+    isAllowedFetch && getRoomState();
+  }, [isAllowedFetch]);
 
   return state;
 };
