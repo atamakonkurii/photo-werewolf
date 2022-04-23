@@ -35,5 +35,5 @@ export const useRoomState = () => {
     isAllowedFetch && getRoomState();
   }, [isAllowedFetch]);
 
-  return state;
+  return { state, roomId };
 };
