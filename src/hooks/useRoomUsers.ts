@@ -12,6 +12,7 @@ export const useRoomUsers = () => {
   const roomId_tmp = gamePath.split("/")[2];
   const roomId = roomId_tmp.split("?")[0];
   const isAllowedFetch = useAllowedFetch();
+  const [isRefetch, setIsRefetch] = useState<boolean>(false);
 
   useEffect(() => {
     const getRoomUsers = async () => {
@@ -22,7 +23,16 @@ export const useRoomUsers = () => {
       setRoomUsers(roomUsers);
     };
     isAllowedFetch && getRoomUsers();
-  }, [isAllowedFetch]);
+  }, [isAllowedFetch, isRefetch]);
+
+  const changeRoomUsers = supabase
+    .from(`game_results:room_id=eq.${roomId}`)
+    .on("INSERT", () => {
+      setIsRefetch(!isRefetch);
+    })
+    .subscribe();
+
+  changeRoomUsers.on;
 
   return roomUsers;
 };
