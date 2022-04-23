@@ -4,5 +4,5 @@ type Props = {
 
 export const Title = (props: Props) => {
   const { title } = props;
-  return <h1 className="pb-6 text-5xl text-white">{title}</h1>;
+  return <h1 className="pb-6 text-3xl text-white md:text-5xl">{title}</h1>;
 };
