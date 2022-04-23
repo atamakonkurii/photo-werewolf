@@ -6,9 +6,9 @@ import { useAllowedFetch } from "@/hooks/useAllowedFetch";
 import { supabase } from "@/utils/supabase";
 
 export const useRoomState = () => {
-  const [state, setState] = useState<"STANDBY" | "GAME" | "VOTE" | "FINISHED">(
-    "STANDBY"
-  );
+  const [state, setState] = useState<
+    "STANDBY" | "PHOTO_UPLOAD" | "GAME" | "VOTE" | "FINISHED"
+  >("STANDBY");
   const router = useRouter();
   const gamePath = router.asPath;
   const roomId_tmp = gamePath.split("/")[2];

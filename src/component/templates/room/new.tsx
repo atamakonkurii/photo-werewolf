@@ -41,9 +41,7 @@ export const RoomNew: VFC<Props> = (props) => {
 
     await supabase
       .from("rooms")
-      // eslint-disable-next-line @typescript-eslint/naming-convention
       .insert([
-        // eslint-disable-next-line @typescript-eslint/naming-convention
         { room_id: roomId, name: values.roomName, owner_id: props.user.id },
       ]);
 
