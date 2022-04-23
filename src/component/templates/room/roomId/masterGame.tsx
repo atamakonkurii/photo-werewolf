@@ -8,18 +8,44 @@ import {
   StandBy,
   Vote,
 } from "@/component/templates/room/roomId/";
+import { useRoomName } from "@/hooks/useRoomName";
+import { useRoomState } from "@/hooks/useRoomState";
+import { useRoomUsers } from "@/hooks/useRoomUsers";
 
 type Props = {
-  user: User | null;
+  authUser: User | null;
 };
 
 export const MasterGame: VFC<Props> = (props) => {
+  const state = useRoomState();
+  const { hasButton, roomName } = useRoomName(props.authUser?.id);
+  const roomUsers = useRoomUsers();
+
+  const GameType = () => {
+    switch (state) {
+      case "STANDBY":
+        return (
+          <StandBy
+            roomName={roomName}
+            hasButton={hasButton}
+            user={props.authUser}
+            roomUsers={roomUsers}
+          />
+        );
+      case "GAME":
+        return <Game />;
+      case "VOTE":
+        return <Vote />;
+      case "FINISHED":
+        return <Finished />;
+      default:
+        return <div>不正なゲームタイプです。</div>;
+    }
+  };
+
   return (
     <div className="flex flex-col justify-center items-center p-16">
-      <StandBy user={props.user} />
-      <Game />
-      <Vote />
-      <Finished />
+      <GameType />
     </div>
   );
 };
