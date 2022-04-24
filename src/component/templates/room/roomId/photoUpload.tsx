@@ -74,9 +74,10 @@ const createWereWolves = async (room_id: string) => {
     .order("random", { ascending: false })
     .limit(2);
 
-  const cloneWolfs = wolfs?.slice() as any[];
-  const shift = cloneWolfs.shift();
-  cloneWolfs.push(shift);
+  // 人狼同士の画像を入れ替えるために配列の順番をずらす
+  const cloneWolves = wolfs?.slice() as any[];
+  const shift = cloneWolves.shift();
+  cloneWolves.push(shift);
 
   wolfs?.map(async (wolf, idx) => {
     await supabase
@@ -87,7 +88,7 @@ const createWereWolves = async (room_id: string) => {
           standard_role: "WEREWOLF",
         },
       ])
-      .match({ room_id: room_id, user_id: cloneWolfs[idx].user_id });
+      .match({ room_id: room_id, user_id: cloneWolves[idx].user_id });
   });
 };
 
