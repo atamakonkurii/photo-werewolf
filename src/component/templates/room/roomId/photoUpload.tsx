@@ -54,7 +54,7 @@ const handleChange = async (
 };
 
 export const PhotoUpload: VFC = () => {
-  const inputRef = useRef(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const [userId, setUserId] = useState("");
   const [roomId, setRoomId] = useState("");
   const router = useRouter();
@@ -88,7 +88,7 @@ export const PhotoUpload: VFC = () => {
           ref={inputRef}
           id="single"
           accept="image/*"
-          onChange={() => {
+          onChange={(event) => {
             handleChange(event, roomId, userId);
           }}
         />
