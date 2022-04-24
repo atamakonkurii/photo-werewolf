@@ -34,7 +34,7 @@ export const MasterGame: VFC<Props> = (props) => {
           />
         );
       case "PHOTO_UPLOAD":
-        return <PhotoUpload />;
+        return <PhotoUpload isOwner={isOwner} />;
       case "GAME":
         return <Game />;
       case "VOTE":
@@ -47,7 +47,7 @@ export const MasterGame: VFC<Props> = (props) => {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center p-16">
+    <div className="flex flex-col justify-center items-center p-8">
       <GameType />
     </div>
   );
