@@ -56,12 +56,39 @@ const handleChange = async (
       {
         photo_key: key,
         photo_url: publicURL,
+        // 先にURLを入れておいて、後で人狼だけ入れ替える
+        exchanged_photo_url: publicURL,
       },
     ])
     .match({ room_id: roomId, user_id: userId });
 
   setIsUploaded(true);
   publicURL && setPhotoUrl(publicURL);
+};
+
+const createWereWolves = async (room_id: string) => {
+  const { data: wolfs } = await supabase
+    .from("standard_game_user_progresses")
+    .select("user_id ,photo_url")
+    .match({ room_id: room_id })
+    .order("random", { ascending: false })
+    .limit(2);
+
+  const cloneWolfs = wolfs?.slice() as any[];
+  const shift = cloneWolfs.shift();
+  cloneWolfs.push(shift);
+
+  wolfs?.map(async (wolf, idx) => {
+    await supabase
+      .from("standard_game_user_progresses")
+      .update([
+        {
+          exchanged_photo_url: wolf.photo_url,
+          standard_role: "WEREWOLF",
+        },
+      ])
+      .match({ room_id: room_id, user_id: cloneWolfs[idx].user_id });
+  });
 };
 
 export const PhotoUpload: VFC<Props> = (props) => {
@@ -145,7 +172,8 @@ export const PhotoUpload: VFC<Props> = (props) => {
           radius="md"
           size="lg"
           onClick={() => {
-            changeGameType(roomId, "PHOTO_UPLOAD");
+            createWereWolves(roomId);
+            changeGameType(roomId, "GAME");
           }}
         >
           ゲームスタート
