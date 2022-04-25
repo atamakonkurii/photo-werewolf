@@ -24,7 +24,7 @@ export const GuestsNew: VFC = () => {
   const form = useForm({
     schema: zodResolver(schema),
     initialValues: {
-      name: "てつこ",
+      name: "",
     },
   });
 
