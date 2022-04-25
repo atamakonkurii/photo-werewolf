@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { Button, IconKey, IconMail } from "@supabase/ui";
+import { IconKey, IconMail } from "@supabase/ui";
 import { Input } from "@supabase/ui";
 import Link from "next/link";
 import { useRef } from "react";
@@ -113,7 +113,8 @@ const SignOut = () => {
             }}
           />
           <div className="h-4" />
-          <Button block>送信</Button>
+          {/* <Button block>送信</Button> */}
+          <p>サインアップは現在できません</p>
           <div className="h-4" />
           <Link href="/users/sign_in">
             <a className=" font-bold hover:text-gray-500">サインインはこちら</a>
