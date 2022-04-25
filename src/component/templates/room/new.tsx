@@ -26,7 +26,7 @@ const schema = z.object({
 });
 
 export const RoomNew: VFC<Props> = (props) => {
-  const [roomId, setRoomId] = useState(nanoid());
+  const [roomId] = useState(nanoid());
   const router = useRouter();
 
   const form = useForm({
@@ -37,8 +37,6 @@ export const RoomNew: VFC<Props> = (props) => {
   });
 
   const handleSubmit = async (values: { roomName: string }) => {
-    setRoomId(nanoid());
-
     await supabase
       .from("rooms")
       .insert([
