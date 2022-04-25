@@ -3,6 +3,7 @@ import { useForm, zodResolver } from "@mantine/form";
 import { nanoid } from "nanoid";
 import { useRouter } from "next/router";
 import type { VFC } from "react";
+import { useState } from "react";
 import { DoorEnter } from "tabler-icons-react";
 import { z } from "zod";
 
@@ -20,6 +21,7 @@ export const GuestsNew: VFC = () => {
   const router = useRouter();
   const standByPath = router.asPath.replace("/guests/new", "");
   const roomId = standByPath.split("/")[2];
+  const [guestId] = useState(nanoid());
 
   const form = useForm({
     schema: zodResolver(schema),
@@ -29,7 +31,6 @@ export const GuestsNew: VFC = () => {
   });
 
   const handleSubmit = async (values: { name: string }) => {
-    const guestId = nanoid();
     // TODO:dbfunctionでひとまとめにする
     await supabase
       .from("users")
