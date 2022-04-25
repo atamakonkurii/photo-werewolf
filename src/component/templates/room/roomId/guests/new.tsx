@@ -63,7 +63,7 @@ export const GuestsNew: VFC = () => {
             <TextInput
               required
               label="名前"
-              placeholder="てつこさんの部屋"
+              placeholder="てつこ"
               classNames={{ label: "text-slate-100 font-bold" }}
               {...form.getInputProps("name")}
             />
