@@ -20,7 +20,7 @@ type Props = {
 export const MasterGame: VFC<Props> = (props) => {
   const state = useRoomState();
   const { isOwner, roomName } = useRoomName(props.authUser?.id);
-  const roomUsers = useRoomUsers();
+  const { roomId, roomUsers } = useRoomUsers();
 
   const GameType = () => {
     switch (state) {
@@ -36,7 +36,7 @@ export const MasterGame: VFC<Props> = (props) => {
       case "PHOTO_UPLOAD":
         return <PhotoUpload isOwner={isOwner} />;
       case "GAME":
-        return <Game />;
+        return <Game isOwner={isOwner} roomId={roomId} />;
       case "VOTE":
         return <Vote />;
       case "FINISHED":

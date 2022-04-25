@@ -1,12 +1,20 @@
 import { Modal } from "@mantine/core";
+import { Button } from "@mantine/core";
 import { useRouter } from "next/router";
 import type { Dispatch, SetStateAction, VFC } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 
 import { Title } from "@/component/atoms/Title";
+import { StandardGamePhotoGallery } from "@/component/organisms/StandardGamePhotoGallery";
 import { useAllowedFetch } from "@/hooks/useAllowedFetch";
+import { changeGameType } from "@/utils/changeGameType";
 import { supabase } from "@/utils/supabase";
+
+type Props = {
+  isOwner: boolean;
+  roomId: string;
+};
 
 const useCheckOwnRole = (setIsOpened: Dispatch<SetStateAction<boolean>>) => {
   const [isWerewolf, setIsWerewolf] = useState(false);
@@ -36,9 +44,11 @@ const useCheckOwnRole = (setIsOpened: Dispatch<SetStateAction<boolean>>) => {
   return isWerewolf;
 };
 
-export const Game: VFC = () => {
+export const Game: VFC<Props> = (props) => {
   const [isOpened, setIsOpened] = useState(false);
   const isWerewolf = useCheckOwnRole(setIsOpened);
+
+  const { isOwner, roomId } = props;
   return (
     <div className="flex flex-col justify-center items-center p-16">
       <Title title="話し合い" />
@@ -55,10 +65,19 @@ export const Game: VFC = () => {
       >
         {isWerewolf ? <>あなたは人狼です。</> : <>あなたは市民です。</>}
       </Modal>
-
-      {/* <Group position="center">
-        <Button onClick={() => setOpened(true)}>Open Modal</Button>
-      </Group> */}
+      <StandardGamePhotoGallery />
+      {isOwner && (
+        <Button
+          color="violet"
+          radius="md"
+          size="lg"
+          onClick={() => {
+            changeGameType(roomId, "VOTE");
+          }}
+        >
+          投票に移る
+        </Button>
+      )}
     </div>
   );
 };
