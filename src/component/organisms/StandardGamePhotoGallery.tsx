@@ -8,13 +8,11 @@ export const StandardGamePhotoGallery = () => {
       {exchangedPhotoUrl ? (
         exchangedPhotoUrl.map((photo: any) => {
           return (
-            <div key={Math.random()} className="flex flex-wrap -m-4">
-              <StandardGamePhoto
-                key={Math.random()}
-                user_name={photo.user_name}
-                exchanged_photo_url={photo.exchanged_photo_url}
-              />
-            </div>
+            <StandardGamePhoto
+              key={Math.random()}
+              user_name={photo.user_name}
+              exchanged_photo_url={photo.exchanged_photo_url}
+            />
           );
         })
       ) : (
