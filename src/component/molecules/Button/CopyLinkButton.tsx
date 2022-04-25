@@ -10,7 +10,7 @@ export const CopyLinkButton = (props: Props) => {
   const { url } = props;
   return (
     <Button
-      color={clipboard.copied ? "teal" : "blue"}
+      color={clipboard.copied ? "teal" : "violet"}
       onClick={() => {
         return clipboard.copy(url);
       }}

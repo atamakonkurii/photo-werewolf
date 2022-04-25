@@ -2,6 +2,7 @@
 import { Button } from "@mantine/core";
 import type { User } from "@supabase/supabase-js";
 import { useRouter } from "next/router";
+import QRCodeSVG from "qrcode.react";
 import type { VFC } from "react";
 
 import { Title } from "@/component/atoms/Title";
@@ -41,9 +42,16 @@ export const StandBy: VFC<Props> = (props) => {
     <div className="flex flex-col justify-center items-center m-4">
       <Title title={props.roomName} />
       {props.isOwner && (
-        <CopyLinkButton
-          url={`${process.env.NEXT_PUBLIC_DOMAIN}${gamePath}/guests/new`}
-        />
+        <>
+          <QRCodeSVG
+            value={`${process.env.NEXT_PUBLIC_DOMAIN}${gamePath}/guests/new`}
+            renderAs="canvas"
+          />
+          <div className="mb-4"></div>
+          <CopyLinkButton
+            url={`${process.env.NEXT_PUBLIC_DOMAIN}${gamePath}/guests/new`}
+          />
+        </>
       )}
 
       <div className="mt-8" />
