@@ -18,13 +18,15 @@ type Props = {
 };
 
 const handleClick = (roomId: string, roomUsers: any[] | null) => {
-  const createStandardGame = async (user_id: string) => {
+  const createStandardGame = async (user_id: string, user_name: string) => {
     await supabase
       .from("standard_game_user_progresses")
-      .upsert([{ room_id: roomId, user_id: user_id, round: 1 }]);
+      .upsert([
+        { room_id: roomId, user_id: user_id, user_name: user_name, round: 1 },
+      ]);
   };
   roomUsers?.map((roomUser) => {
-    createStandardGame(roomUser.users.user_id);
+    createStandardGame(roomUser.users.user_id, roomUser.users.name);
   });
   changeGameType(roomId, "PHOTO_UPLOAD");
 };

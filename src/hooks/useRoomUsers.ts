@@ -34,5 +34,5 @@ export const useRoomUsers = () => {
 
   changeRoomUsers.on;
 
-  return roomUsers;
+  return { roomId, roomUsers };
 };
