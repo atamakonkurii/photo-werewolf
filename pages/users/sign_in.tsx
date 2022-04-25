@@ -78,9 +78,11 @@ const SignIn = () => {
           <div className="h-4" />
           <Button block>送信</Button>
           <div className="h-4" />
-          <Link href="/users/sign_up">
+          {/* <Link href="/users/sign_up"> */}
+          <Link href="/">
             <a className=" font-bold hover:text-gray-500">
-              サインアップはこちら
+              {/* サインアップはこちら */}
+              サインアップは現在できません
             </a>
           </Link>
         </form>
