@@ -50,7 +50,7 @@ export const Game: VFC<Props> = (props) => {
 
   const { isOwner, roomId } = props;
   return (
-    <div className="flex flex-col justify-center items-center p-16">
+    <div className="flex flex-col justify-center items-center p-4">
       <Title title="話し合い" />
       <Modal
         opened={isOpened}

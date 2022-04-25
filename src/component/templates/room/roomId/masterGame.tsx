@@ -38,7 +38,7 @@ export const MasterGame: VFC<Props> = (props) => {
       case "GAME":
         return <Game isOwner={isOwner} roomId={roomId} />;
       case "VOTE":
-        return <Vote />;
+        return <Vote isOwner={isOwner} roomId={roomId} />;
       case "FINISHED":
         return <Finished />;
       default:
