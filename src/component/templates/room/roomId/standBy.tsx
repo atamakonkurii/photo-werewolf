@@ -46,6 +46,7 @@ export const StandBy: VFC<Props> = (props) => {
           <QRCodeSVG
             value={`${process.env.NEXT_PUBLIC_DOMAIN}${gamePath}/guests/new`}
             renderAs="canvas"
+            includeMargin={true}
           />
           <div className="mb-4"></div>
           <CopyLinkButton
