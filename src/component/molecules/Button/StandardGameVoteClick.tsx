@@ -25,13 +25,14 @@ const handleClick = (setOpened: {
 const handleVote = async (
   setOpened: Dispatch<SetStateAction<boolean>>,
   setIsVoted: Dispatch<SetStateAction<boolean>>,
+  user_name: string,
   userId: string,
   roomId: string,
   votedUserId: string
 ) => {
   await supabase
     .from("standard_game_user_progresses")
-    .update({ vote_to: votedUserId })
+    .update({ user_id_voted_for: votedUserId, user_name_voted_for: user_name })
     .match({ room_id: roomId, user_id: userId, round: 1 });
   setOpened(false);
   setIsVoted(true);
@@ -62,7 +63,14 @@ export const StandardGameVoteClick = (props: Props) => {
           radius="md"
           size="sm"
           onClick={() => {
-            handleVote(setOpened, setIsVoted, userId, roomId, votedUserId);
+            handleVote(
+              setOpened,
+              setIsVoted,
+              user_name,
+              userId,
+              roomId,
+              votedUserId
+            );
           }}
         >
           はい

@@ -13,8 +13,8 @@ import { supabase } from "@/utils/supabase";
 const schema = z.object({
   name: z
     .string()
-    .min(3, { message: "3~10文字で入力してください。" })
-    .max(10, { message: "3~10文字で入力してください。" }),
+    .min(2, { message: "2~10文字で入力してください。" })
+    .max(10, { message: "2~10文字で入力してください。" }),
 });
 
 export const GuestsNew: VFC = () => {
