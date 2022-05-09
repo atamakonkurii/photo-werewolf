@@ -30,34 +30,30 @@ export const Finished: VFC = () => {
     <div className="flex flex-col justify-center items-center p-4">
       <Title title="結果" />
       {results ? (
-        <div className="overflow-x-auto">
-          <table className="text-sm text-white whitespace-nowrap  sm:text-lg">
-            <thead className="border-b">
-              <tr>
-                <th className="py-4 px-2 sm:px-6">名前</th>
-                <th className="py-4 px-2 sm:px-6">投票した人</th>
-                <th className="py-4 px-2 sm:px-6">勝敗</th>
-                <th className="py-4 px-2 sm:px-6">役職</th>
-              </tr>
-            </thead>
-            <tbody>
-              {results.map((result) => {
-                return (
-                  <tr key="2" className="border-b">
-                    <td className="py-4 px-2 sm:px-6">{result.user_name}</td>
-                    <td className="py-4 px-2 sm:px-6">
-                      {result.user_name_voted_for}
-                    </td>
-                    <td className="py-4 px-2 sm:px-6">{result.results}</td>
-                    <td className="py-4 px-2 sm:px-6">
-                      {result.standard_role}
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
+        <table className="text-sm text-white whitespace-nowrap  sm:text-lg">
+          <thead className="border-b">
+            <tr>
+              <th className="py-4 px-2 sm:px-6">名前</th>
+              <th className="py-4 px-2 sm:px-6">投票した人</th>
+              <th className="py-4 px-2 sm:px-6">勝敗</th>
+              <th className="py-4 px-2 sm:px-6">役職</th>
+            </tr>
+          </thead>
+          <tbody>
+            {results.map((result) => {
+              return (
+                <tr key="2" className="border-b">
+                  <td className="py-4 px-2 sm:px-6">{result.user_name}</td>
+                  <td className="py-4 px-2 sm:px-6">
+                    {result.user_name_voted_for}
+                  </td>
+                  <td className="py-4 px-2 sm:px-6">{result.results}</td>
+                  <td className="py-4 px-2 sm:px-6">{result.standard_role}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       ) : (
         <div>集計中</div>
       )}
