@@ -42,7 +42,7 @@ export const Finished: VFC = () => {
           <tbody>
             {results.map((result) => {
               return (
-                <tr key="2" className="border-b">
+                <tr key={Math.random()} className="border-b">
                   <td className="py-4 px-2 sm:px-6">{result.user_name}</td>
                   <td className="py-4 px-2 sm:px-6">
                     {result.user_name_voted_for}
