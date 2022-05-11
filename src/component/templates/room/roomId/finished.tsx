@@ -20,7 +20,8 @@ export const Finished: VFC = () => {
       const { data: results } = await supabase
         .from("standard_game_user_progresses")
         .select("user_name, user_name_voted_for, standard_role, results")
-        .match({ room_id: roomId });
+        .match({ room_id: roomId })
+        .order("standard_role, user_name", { ascending: true });
       setResults(results);
     };
     isAllowedFetch && getRoomState();
