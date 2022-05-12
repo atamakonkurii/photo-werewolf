@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import type { Dispatch, SetStateAction } from "react";
 import { useState } from "react";
 
+import { useFetchOwnRole } from "@/hooks/useFetchOwnRole";
 import { supabase } from "@/utils/supabase";
 
 /* eslint-disable @next/next/no-img-element */
@@ -47,6 +48,7 @@ export const StandardGameVoteClick = (props: Props) => {
   const roomId = roomId_tmp.split("?uid=")[0];
   const userId = roomId_tmp.split("?uid=")[1];
   const { exchanged_photo_url, user_name, votedUserId } = props;
+  const ownRole = useFetchOwnRole(roomId, userId, 1);
   return (
     <div className="mb-8">
       <Modal
@@ -56,25 +58,36 @@ export const StandardGameVoteClick = (props: Props) => {
         }}
         title="投票タイム"
       >
-        <p className="mb-4">{user_name}さんに投票しますか？</p>
-
-        <Button
-          color="violet"
-          radius="md"
-          size="sm"
-          onClick={() => {
-            handleVote(
-              setOpened,
-              setIsVoted,
-              user_name,
-              userId,
-              roomId,
-              votedUserId
-            );
-          }}
-        >
-          はい
-        </Button>
+        {ownRole === "WEREWOLF" ? (
+          <>
+            <p className="mb-4">人狼に投票権はありません。</p>
+          </>
+        ) : userId === votedUserId ? (
+          <>
+            <p className="mb-4">自分には投票できません。</p>
+          </>
+        ) : (
+          <>
+            <p className="mb-4">{user_name}さんに投票しますか？</p>
+            <Button
+              color="violet"
+              radius="md"
+              size="sm"
+              onClick={() => {
+                handleVote(
+                  setOpened,
+                  setIsVoted,
+                  user_name,
+                  userId,
+                  roomId,
+                  votedUserId
+                );
+              }}
+            >
+              はい
+            </Button>
+          </>
+        )}
       </Modal>
       <img
         src={exchanged_photo_url}

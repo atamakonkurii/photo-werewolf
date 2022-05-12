@@ -3,11 +3,17 @@ import type { VFC } from "react";
 
 import { Title } from "@/component/atoms/Title";
 import { StandardGameVote } from "@/component/organisms/StandardGameVote";
+import { calculateResults } from "@/utils/calculateResults";
 import { changeGameType } from "@/utils/changeGameType";
 
 type Props = {
   isOwner: boolean;
   roomId: string;
+};
+
+const handleClick = async (roomId: string) => {
+  await calculateResults(roomId);
+  await changeGameType(roomId, "FINISHED");
 };
 
 export const Vote: VFC<Props> = (props) => {
@@ -22,7 +28,7 @@ export const Vote: VFC<Props> = (props) => {
           radius="md"
           size="lg"
           onClick={() => {
-            changeGameType(roomId, "FINISHED");
+            handleClick(roomId);
           }}
         >
           結果発表

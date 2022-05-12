@@ -20,7 +20,8 @@ export const Finished: VFC = () => {
       const { data: results } = await supabase
         .from("standard_game_user_progresses")
         .select("user_name, user_name_voted_for, standard_role, results")
-        .match({ room_id: roomId });
+        .match({ room_id: roomId })
+        .order("standard_role, user_name", { ascending: true });
       setResults(results);
     };
     isAllowedFetch && getRoomState();
@@ -42,10 +43,12 @@ export const Finished: VFC = () => {
           <tbody>
             {results.map((result) => {
               return (
-                <tr key="2" className="border-b">
+                <tr key={Math.random()} className="border-b">
                   <td className="py-4 px-2 sm:px-6">{result.user_name}</td>
                   <td className="py-4 px-2 sm:px-6">
-                    {result.user_name_voted_for}
+                    {result.standard_role === "WEREWOLF"
+                      ? "---"
+                      : result.user_name_voted_for}
                   </td>
                   <td className="py-4 px-2 sm:px-6">{result.results}</td>
                   <td className="py-4 px-2 sm:px-6">{result.standard_role}</td>
