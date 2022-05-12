@@ -11,6 +11,11 @@ type Props = {
   roomId: string;
 };
 
+const handleClick = async (roomId: string) => {
+  await calculateResults(roomId);
+  await changeGameType(roomId, "FINISHED");
+};
+
 export const Vote: VFC<Props> = (props) => {
   const { isOwner, roomId } = props;
   return (
@@ -23,8 +28,7 @@ export const Vote: VFC<Props> = (props) => {
           radius="md"
           size="lg"
           onClick={() => {
-            calculateResults(roomId);
-            changeGameType(roomId, "FINISHED");
+            handleClick(roomId);
           }}
         >
           結果発表

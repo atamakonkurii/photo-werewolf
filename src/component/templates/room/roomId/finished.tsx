@@ -46,7 +46,9 @@ export const Finished: VFC = () => {
                 <tr key={Math.random()} className="border-b">
                   <td className="py-4 px-2 sm:px-6">{result.user_name}</td>
                   <td className="py-4 px-2 sm:px-6">
-                    {result.user_name_voted_for}
+                    {result.standard_role === "WEREWOLF"
+                      ? "---"
+                      : result.user_name_voted_for}
                   </td>
                   <td className="py-4 px-2 sm:px-6">{result.results}</td>
                   <td className="py-4 px-2 sm:px-6">{result.standard_role}</td>

@@ -62,11 +62,7 @@ export const StandardGameVoteClick = (props: Props) => {
           <>
             <p className="mb-4">人狼に投票権はありません。</p>
           </>
-        ) : (
-          <></>
-        )}
-
-        {userId === votedUserId ? (
+        ) : userId === votedUserId ? (
           <>
             <p className="mb-4">自分には投票できません。</p>
           </>
