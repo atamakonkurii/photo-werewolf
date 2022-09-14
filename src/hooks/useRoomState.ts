@@ -14,6 +14,7 @@ export const useRoomState = () => {
   const roomId_tmp = gamePath.split("/")[2];
   const roomId = roomId_tmp.split("?")[0];
   const isAllowedFetch = useAllowedFetch();
+  const [isRefetch, setIsRefetch] = useState<boolean>(false);
 
   useEffect(() => {
     const getRoomState = async () => {
@@ -28,16 +29,18 @@ export const useRoomState = () => {
       }
     };
     isAllowedFetch && getRoomState();
-  }, [isAllowedFetch]);
+  }, [isAllowedFetch, isRefetch]);
+
+  const handleRefetchChange = () => {
+    console.warn("---------------");
+    console.warn(!isRefetch);
+    console.warn("---------------");
+    setIsRefetch(!isRefetch);
+  };
 
   const changeRoomStatus = supabase
     .from(`rooms:room_id=eq.${roomId}`)
-    .on("UPDATE", (payload) => {
-      console.warn("---------------");
-      console.warn(payload.new.room_status);
-      console.warn("---------------");
-      setState(payload.new.room_status);
-    })
+    .on("UPDATE", handleRefetchChange)
     .subscribe();
 
   changeRoomStatus.on;

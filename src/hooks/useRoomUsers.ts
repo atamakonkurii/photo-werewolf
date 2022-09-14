@@ -25,14 +25,16 @@ export const useRoomUsers = () => {
     isAllowedFetch && getRoomUsers();
   }, [isAllowedFetch, isRefetch]);
 
+  const handleRefetchChange = () => {
+    console.warn("---------------");
+    console.warn(!isRefetch);
+    console.warn("---------------");
+    setIsRefetch(!isRefetch);
+  };
+
   const changeRoomUsers = supabase
     .from(`game_results:room_id=eq.${roomId}`)
-    .on("INSERT", () => {
-      console.warn("---------------");
-      console.warn(!isRefetch);
-      console.warn("---------------");
-      setIsRefetch(!isRefetch);
-    })
+    .on("INSERT", handleRefetchChange)
     .subscribe();
 
   changeRoomUsers.on;
