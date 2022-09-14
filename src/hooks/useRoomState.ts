@@ -31,7 +31,7 @@ export const useRoomState = () => {
   }, [isAllowedFetch]);
 
   const changeRoomStatus = supabase
-    .from(`rooms:room_id=eq.${roomId}`)
+    .from(`rooms`)
     .on("UPDATE", (payload) => {
       setState(payload.new.room_status);
     })
