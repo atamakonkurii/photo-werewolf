@@ -26,7 +26,7 @@ export const useRoomUsers = () => {
   }, [isAllowedFetch, isRefetch]);
 
   const changeRoomUsers = supabase
-    .from(`game_results`)
+    .from(`game_results:room_id=eq.${roomId}`)
     .on("INSERT", () => {
       console.warn("---------------");
       console.warn(!isRefetch);
