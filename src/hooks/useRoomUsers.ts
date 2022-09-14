@@ -32,12 +32,18 @@ export const useRoomUsers = () => {
     setIsRefetch(!isRefetch);
   };
 
-  const changeRoomUsers = supabase
-    .from(`game_results:room_id=eq.${roomId}`)
-    .on("INSERT", handleRefetchChange)
-    .subscribe();
+  useEffect(() => {
+    const changeRoomUsers = supabase
+      .from(`game_results:room_id=eq.${roomId}`)
+      .on("INSERT", handleRefetchChange)
+      .subscribe();
 
-  changeRoomUsers.on;
+    changeRoomUsers.on;
+
+    return () => {
+      supabase.removeSubscription(changeRoomUsers);
+    };
+  }, [isAllowedFetch]);
 
   return { roomId, roomUsers };
 };

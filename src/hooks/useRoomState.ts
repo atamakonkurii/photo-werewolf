@@ -38,12 +38,18 @@ export const useRoomState = () => {
     setIsRefetch(!isRefetch);
   };
 
-  const changeRoomStatus = supabase
-    .from(`rooms:room_id=eq.${roomId}`)
-    .on("UPDATE", handleRefetchChange)
-    .subscribe();
+  useEffect(() => {
+    const changeRoomStatus = supabase
+      .from(`rooms:room_id=eq.${roomId}`)
+      .on("UPDATE", handleRefetchChange)
+      .subscribe();
 
-  changeRoomStatus.on;
+    changeRoomStatus.on;
+
+    return () => {
+      supabase.removeSubscription(changeRoomStatus);
+    };
+  }, [isAllowedFetch]);
 
   return state;
 };
