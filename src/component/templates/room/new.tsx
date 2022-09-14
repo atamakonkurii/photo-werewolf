@@ -7,7 +7,6 @@ import type { User } from "@supabase/supabase-js";
 import { nanoid } from "nanoid";
 import { useRouter } from "next/router";
 import type { VFC } from "react";
-import { useState } from "react";
 import { DoorEnter } from "tabler-icons-react";
 import { z } from "zod";
 
@@ -26,7 +25,7 @@ const schema = z.object({
 });
 
 export const RoomNew: VFC<Props> = (props) => {
-  const [roomId] = useState(nanoid());
+  const roomId = nanoid();
   const router = useRouter();
 
   const form = useForm({
