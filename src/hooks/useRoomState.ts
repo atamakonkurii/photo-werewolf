@@ -33,6 +33,9 @@ export const useRoomState = () => {
   const changeRoomStatus = supabase
     .from(`rooms`)
     .on("UPDATE", (payload) => {
+      console.warn("---------------");
+      console.warn(payload.new.room_status);
+      console.warn("---------------");
       setState(payload.new.room_status);
     })
     .subscribe();

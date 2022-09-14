@@ -28,6 +28,9 @@ export const useRoomUsers = () => {
   const changeRoomUsers = supabase
     .from(`game_results`)
     .on("INSERT", () => {
+      console.warn("---------------");
+      console.warn(!isRefetch);
+      console.warn("---------------");
       setIsRefetch(!isRefetch);
     })
     .subscribe();
