@@ -1,5 +1,4 @@
-import { Button, IconKey, IconMail } from "@supabase/ui";
-import { Input } from "@supabase/ui";
+import { Button, Input } from "@mantine/core";
 import Link from "next/link";
 import { Controller, useForm } from "react-hook-form";
 
@@ -11,11 +10,7 @@ const SignIn = () => {
     email: string;
     password: string;
   };
-  const {
-    control,
-    formState: { errors },
-    handleSubmit,
-  } = useForm<formData>();
+  const { control, handleSubmit } = useForm<formData>();
   const RunSignIn = async ({ email, password }: formData) => {
     await supabase.auth.signIn({
       email,
@@ -35,9 +30,6 @@ const SignIn = () => {
                   onBlur={onBlur}
                   onChange={onChange}
                   type="email"
-                  label="Email"
-                  icon={<IconMail />}
-                  error={errors.email ? errors.email.message : ""}
                   placeholder="メールアドレス"
                 />
               );
@@ -60,9 +52,6 @@ const SignIn = () => {
                   onBlur={onBlur}
                   onChange={onChange}
                   type="password"
-                  icon={<IconKey />}
-                  label="Password"
-                  error={errors.password ? errors.password.message : ""}
                   placeholder="パスワード(8文字以上)"
                 />
               );
@@ -76,7 +65,7 @@ const SignIn = () => {
             }}
           />
           <div className="h-4" />
-          <Button block>送信</Button>
+          <Button>送信</Button>
           <div className="h-4" />
           {/* <Link href="/users/sign_up"> */}
           <Link href="/">
