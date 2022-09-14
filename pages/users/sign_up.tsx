@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { IconKey, IconMail } from "@supabase/ui";
-import { Input } from "@supabase/ui";
+import { Input } from "@mantine/core";
 import Link from "next/link";
 import { useRef } from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -13,12 +12,7 @@ const SignOut = () => {
     password: string;
     confirmPassword?: string;
   };
-  const {
-    control,
-    formState: { errors },
-    handleSubmit,
-    watch,
-  } = useForm<formData>();
+  const { control, handleSubmit, watch } = useForm<formData>();
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const password = useRef({});
   password.current = watch("password", "");
@@ -41,9 +35,6 @@ const SignOut = () => {
                   onBlur={onBlur}
                   onChange={onChange}
                   type="email"
-                  label="Email"
-                  icon={<IconMail />}
-                  error={errors.email ? errors.email.message : ""}
                   placeholder="メールアドレス"
                 />
               );
@@ -66,9 +57,6 @@ const SignOut = () => {
                   onBlur={onBlur}
                   onChange={onChange}
                   type="password"
-                  icon={<IconKey />}
-                  label="Password"
-                  error={errors.password ? errors.password.message : ""}
                   placeholder="パスワード(8文字以上)"
                 />
               );
@@ -90,11 +78,6 @@ const SignOut = () => {
                   onBlur={onBlur}
                   onChange={onChange}
                   type="password"
-                  icon={<IconKey />}
-                  label="ConfirmPassword"
-                  error={
-                    errors.confirmPassword ? errors.confirmPassword.message : ""
-                  }
                   placeholder="パスワード(確認用)"
                 />
               );
